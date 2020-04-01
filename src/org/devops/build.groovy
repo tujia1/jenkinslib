@@ -1,6 +1,7 @@
 package org.devops
+package tools
 
-import tools.PrintMes
+tools = new tools()
 //构建类型
 def Build(buildType,buildShell){
     def buildTools = ["mvn":"M2","ant":"ANT","gradle":"GRADLE","npm":"NPM"]
