@@ -1,7 +1,6 @@
 package org.devops
-package tools
 
-tools = new tools()
+def tools = new org.devops.tools()  
 //构建类型
 def Build(buildType,buildShell){
     def buildTools = ["mvn":"M2","ant":"ANT","gradle":"GRADLE","npm":"NPM"]
