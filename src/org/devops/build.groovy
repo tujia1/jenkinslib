@@ -1,5 +1,5 @@
 package org.devops
-package org.devops.tools
+
 
 def = new org.devops.tools()  
 //构建类型
