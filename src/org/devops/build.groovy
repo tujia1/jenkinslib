@@ -5,7 +5,7 @@ def Build(buildType,buildShell){
     def buildTools = ["mvn":"M2","ant":"ANT","gradle":"GRADLE","npm":"NPM"]
     def tools = new org.devops.tools() 
     
-    tools.PrintMes("当前选择的构建类型为 ${buildType}","red")
+    tools.PrintMes("当前选择的构建类型为 ${buildType}","blue")
     buildHome= tool buildTools[buildType]
     
     if ("${buildType}" == "npm"){
