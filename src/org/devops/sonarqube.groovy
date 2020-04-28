@@ -4,7 +4,7 @@ package org.devops
 
 //扫描
 def SonarScan(projectName,projectDesc,projectPath){
-    def  Sonarserver = "http://119.29.96.164:9000"
+    def  Sonarserver = ""
     def  SonarDate = sh  returnStdout: true, script: 'date +%Y%m%d-%H%M'
     SonarDate = SonarDate - "\n"
 
