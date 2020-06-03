@@ -22,7 +22,7 @@ def dingtalk(){
             ],
             [
                 title: '控制台',
-                actionUrl: 'http://119.29.96.164:8080'
+                actionUrl: 'jenkinsserverip'
             ]
         ]
     )    
