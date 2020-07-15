@@ -66,3 +66,44 @@ def GetProjectID(repoName='',projectName){
     }
     return repoId
 }
+
+//创建合并请求
+def CreateMr(projectId,sourceBranch,targetBranch,title,assigneeUser=""){
+    try {
+        def mrUrl = "projects/${projectId}/merge_requests"
+        def reqBody = """{"source_branch":"${sourceBranch}", "target_branch": "${targetBranch}","title":"${title}","assignee_id":"${assigneeUser}"}"""
+        response = HttpReq("POST",mrUrl,reqBody).content
+        return response
+    } catch(e){
+        println(e)
+    }
+}
+
+//搜索分支
+def SearchProjectBranches(projectId,searchKey){
+    def branchUrl =  "projects/${projectId}/repository/branches?search=${searchKey}"
+    response = HttpReq("GET",branchUrl,'').content
+    def branchInfo = readJSON text: """${response}"""
+    
+    def branches = [:]
+    branches[projectId] = []
+    if(branchInfo.size() ==0){
+        return branches
+    } else {
+        for (branch in branchInfo){
+            //println(branch)
+            branches[projectId] += ["branchName":branch["name"],
+                                    "commitMes":branch["commit"]["message"],
+                                    "commitId":branch["commit"]["id"],
+                                    "merged": branch["merged"],
+                                    "createTime": branch["commit"]["created_at"]]
+        }
+        return branches
+    }
+}
+
+//允许合并
+def AcceptMr(projectId,mergeId){
+    def apiUrl = "projects/${projectId}/merge_requests/${mergeId}/merge"
+    HttpReq('PUT',apiUrl,'')
+}
